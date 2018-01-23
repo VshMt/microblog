@@ -1,0 +1,12 @@
+Collecting flask
+  Using cached Flask-0.12.2-py2.py3-none-any.whl
+Collecting Werkzeug>=0.7 (from flask)
+  Using cached Werkzeug-0.14.1-py2.py3-none-any.whl
+Collecting click>=2.0 (from flask)
+  Using cached click-6.7-py2.py3-none-any.whl
+Collecting itsdangerous>=0.21 (from flask)
+Collecting Jinja2>=2.4 (from flask)
+  Using cached Jinja2-2.10-py2.py3-none-any.whl
+Collecting MarkupSafe>=0.23 (from Jinja2>=2.4->flask)
+Installing collected packages: Werkzeug, click, itsdangerous, MarkupSafe, Jinja2, flask
+Successfully installed Jinja2-2.10 MarkupSafe-1.0 Werkzeug-0.14.1 click-6.7 flask-0.12.2 itsdangerous-0.24
