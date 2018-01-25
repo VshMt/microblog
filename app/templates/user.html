@@ -8,6 +8,15 @@
                 <h1>Пользователь: {{ user.username }}</h1>
                 {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
                 {% if user.last_seen %}<p>Последний раз видели: {{ user.last_seen }}</p>{% endif %}
+                <p>Подписчиков: {{ user.followers.count() }}, подписок: {{ user.followed.count() }}.</p>
+                {% if user == current_user %}
+                <p><a href="{{ url_for('edit_profile') }}">Редактировать ваш профиль</a></p>
+                {% elif not current_user.is_following(user) %}
+                <p><a href="{{ url_for('follow', username=user.username) }}">Подписаться</a></p>
+                {% else %}
+                <p><a href="{{ url_for('unfollow', username=user.username) }}">Отписаться</a></p>
+                {% endif %}
+
             </td>
         </tr>
     </table>
@@ -16,3 +25,4 @@
        {% include '__post.html' %}
     {% endfor %}
 {% endblock %}
+
