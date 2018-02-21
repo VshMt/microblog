@@ -16,7 +16,6 @@
                 {% else %}
                 <p><a href="{{ url_for('unfollow', username=user.username) }}">Отписаться</a></p>
                 {% endif %}
-
             </td>
         </tr>
     </table>
@@ -24,5 +23,10 @@
     {% for post in posts %}
        {% include '__post.html' %}
     {% endfor %}
+    {% if prev_url %}
+    <a href="{{ prev_url }}">Более новые</a>
+    {% endif %}
+    {% if next_url %}
+    <a href="{{ next_url }}">Более старые</a>
+    {% endif %}
 {% endblock %}
-
