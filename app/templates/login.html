@@ -5,9 +5,6 @@
     <form action="" method="post">
         {{ form.hidden_tag() }}
         <p>
-            Новый пользователь? <a href="{{ url_for('register') }}"> Создать аккаунт!</a>
-        </p>
-        <p>
             {{ form.username.label }}<br>
             {{ form.username(size=32) }}<br>
             {% for error in form.username.errors %}
@@ -23,6 +20,9 @@
         </p>
         <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
         <p>{{ form.submit() }}</p>
+        <p>
+            Новый пользователь? <a href="{{ url_for('register') }}"> Создать аккаунт!</a>
+        </p>
         <p>
         Forgot Your Password?
         <a href="{{ url_for('reset_password_request') }}">Click to Reset It</a>

@@ -18,12 +18,22 @@
     {% for post in posts %}
        {% include '__post.html' %}
     {% endfor %}
-    {% if prev_url %}
-    <a href="{{ prev_url }}">Более новые</a>
-    {% endif %}
-    {% if next_url %}
-    <a href="{{ next_url }}">Более старые</a>
-    {% endif %}
 
+<nav aria-label="...">
+    <ul class="pager">
+      <li>
+        <span class="previous{% if not prev_url %} disabled{% endif %}">
+            <a href="{{ prev_url or '#' }}">
+                <span aria-hidden="true">&larr;</span> Следующие сообщения
+            </a>
+        </span>
+        <span class="next{% if not next_url %} disabled{% endif %}">
+            <a href="{{ next_url or '#' }}">
+                Предыдущие сообщения <span aria-hidden="true">&rarr;</span>
+            </a>
+        </span>
+      </li>
+    </ul>
+</nav>
 
 {% endblock %}
