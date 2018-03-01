@@ -1,7 +1,7 @@
 ﻿{% extends "base.html" %}
 
-{% block content %}
-    <h1>Привет, {{ current_user.username }}!</h1>
+{% block app_content %}
+    <h1>{{_('Привет')}}, {{ current_user.username }}!</h1>
     {% if form %}
     <form action="" method="post">
         {{ form.hidden_tag() }}
@@ -24,12 +24,12 @@
       <li>
         <span class="previous{% if not prev_url %} disabled{% endif %}">
             <a href="{{ prev_url or '#' }}">
-                <span aria-hidden="true">&larr;</span> Следующие сообщения
+                <span aria-hidden="true">&larr;</span> {{_('Следующие сообщения')}}
             </a>
         </span>
         <span class="next{% if not next_url %} disabled{% endif %}">
             <a href="{{ next_url or '#' }}">
-                Предыдущие сообщения <span aria-hidden="true">&rarr;</span>
+                {{_('Предыдущие сообщения')}} <span aria-hidden="true">&rarr;</span>
             </a>
         </span>
       </li>

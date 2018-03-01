@@ -1,7 +1,13 @@
 ﻿{% extends 'bootstrap/base.html' %}
 
 {% block title %}
-    {% if title %}{{ title }} - Microblog{% else %}Добро пожаловать в Microblog{% endif %}
+    {% if title %}{{ title }} - Microblog{% else %} {{ _('Добро пожаловать в') }} Microblog{% endif %}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+    {{ moment.lang('ru') }}     <!-- Я добавил эту строку -->
 {% endblock %}
 
 {% block navbar %}
@@ -18,15 +24,19 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('index') }}">Домашняя</a></li>
-                    <li><a href="{{ url_for('explore') }}">Просмотр сообщений</a></li>
+                    <li><a href="{{ url_for('index') }}">{{_('Домашняя')}}</a></li>
+                    <li><a href="{{ url_for('explore') }}">{{_('Просмотр сообщений')}}</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {% if current_user.is_anonymous %}
-                    <li><a href="{{ url_for('login') }}">Вход</a></li>
+                    <li><a href="{{ url_for('login') }}">{{_('Вход')}}</a></li>
                     {% else %}
-                    <li><a href="{{ url_for('user', username=current_user.username) }}">Профиль</a></li>
-                    <li><a href="{{ url_for('logout') }}">Выход</a></li>
+                        {% if edit_profile_flg %}
+                            <li><a href="{{ url_for('edit_profile')}}">{{_('Редактировать профиль')}}</a></li>
+                        {% else %}
+                            <li><a href="{{ url_for('user', username=current_user.username) }}">{{_('Профиль')}}</a></li>
+                        {% endif %}
+                    <li><a href="{{ url_for('logout') }}">{{_('Выход')}}</a></li>
                     {% endif %}
                 </ul>
             </div>

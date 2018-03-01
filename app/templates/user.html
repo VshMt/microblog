@@ -1,20 +1,22 @@
 ﻿{% extends "base.html" %}
 
-{% block content %}
+{% block app_content %}
     <table>
         <tr valign="top">
             <td><img src="{{ user.avatar(128) }}"></td>
             <td>
-                <h1>Пользователь: {{ user.username }}</h1>
+                <h1>{{_('Пользователь')}}: {{ user.username }}</h1>
                 {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
-                {% if user.last_seen %}<p>Последний раз видели: {{ user.last_seen }}</p>{% endif %}
-                <p>Подписчиков: {{ user.followers.count() }}, подписок: {{ user.followed.count() }}.</p>
+                {% if user.last_seen %}
+                <p>{{_('Последний раз видели')}}: {{ moment(user.last_seen).format('LLL') }}</p>
+                {% endif %}
+                <p>{{_('Подписчиков')}}: {{ user.followers.count() }}, {{_('подписок')}}: {{ user.followed.count() }}.</p>
                 {% if user == current_user %}
-                <p><a href="{{ url_for('edit_profile') }}">Редактировать ваш профиль</a></p>
+                <p><a href="{{ url_for('edit_profile') }}">{{_('Редактировать ваш профиль')}}</a></p>
                 {% elif not current_user.is_following(user) %}
-                <p><a href="{{ url_for('follow', username=user.username) }}">Подписаться</a></p>
+                <p><a href="{{ url_for('follow', username=user.username) }}">{{_('Подписаться')}}</a></p>
                 {% else %}
-                <p><a href="{{ url_for('unfollow', username=user.username) }}">Отписаться</a></p>
+                <p><a href="{{ url_for('unfollow', username=user.username) }}">{{_('Отписаться')}}</a></p>
                 {% endif %}
             </td>
         </tr>
@@ -24,9 +26,9 @@
        {% include '__post.html' %}
     {% endfor %}
     {% if prev_url %}
-    <a href="{{ prev_url }}">Более новые</a>
+    <a href="{{ prev_url }}">{{_('Более новые')}}</a>
     {% endif %}
     {% if next_url %}
-    <a href="{{ next_url }}">Более старые</a>
+    <a href="{{ next_url }}">{{_('Более старые')}}</a>
     {% endif %}
 {% endblock %}
