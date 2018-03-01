@@ -7,7 +7,7 @@
 {% block scripts %}
     {{ super() }}
     {{ moment.include_moment() }}
-    {{ moment.lang('ru') }}     <!-- Я добавил эту строку -->
+    {{ moment.lang(g.locale) }}     <!-- Я добавил эту строку -->
 {% endblock %}
 
 {% block navbar %}

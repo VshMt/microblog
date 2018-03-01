@@ -12,9 +12,7 @@
                 </a>
             {% endset %}
             {{ _('%(username)s написал %(when)s',
-                username=user_link, when=moment(post.timestamp).fromNow()) }}
-            {{ post.body }}
-            says:
+                username=user_link, when=moment(post.timestamp).fromNow()) }}N:
             <br>
             {{ post.body }}
         </td>

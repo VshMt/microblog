@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*- 
 from flask import render_template, flash, redirect, url_for
 from flask import request
+from flask import g
 from flask_login import current_user, login_user
 from flask_login import logout_user, login_required
 from app import app
@@ -13,12 +14,12 @@ from app.models import User, Post
 from werkzeug.urls import url_parse
 from datetime import datetime
 from flask_babel import _
+from flask_babel import get_locale
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-    edit_profile_flg = False
     form = PostForm()
     if form.validate_on_submit():
         post = Post(body=form.post.data, author=current_user)
@@ -39,7 +40,6 @@ def index():
 @app.route('/explore')
 @login_required
 def explore():
-    edit_profile_flg = False
     page = request.args.get('page', 1, type=int)
     posts = Post.query.order_by(Post.timestamp.desc()).paginate(
         page, app.config['POSTS_PER_PAGE'], False)
@@ -52,7 +52,6 @@ def explore():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    edit_profile_flg = False
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = LoginForm()
@@ -71,13 +70,11 @@ def login():
 @app.route('/logout')
 @login_required
 def logout():
-    edit_profile_flg = False
     logout_user()
     return redirect(url_for('index'))
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    edit_profile_flg = False
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = RegistrationForm()
@@ -124,7 +121,6 @@ def edit_profile():
 @app.route('/follow/<username>')
 @login_required
 def follow(username):
-    edit_profile_flg = False
     user = User.query.filter_by(username=username).first()
     if user is None:
         flash(_('Пользователь %(username)s не найден.', username=username))
@@ -140,7 +136,6 @@ def follow(username):
 @app.route('/unfollow/<username>')
 @login_required
 def unfollow(username):
-    edit_profile_flg = False
     user = User.query.filter_by(username=username).first()
     if user is None:
         flash(_('Пользователь %(username)s не найден.', username=username))
@@ -155,14 +150,13 @@ def unfollow(username):
 
 @app.before_request
 def before_request():
-    edit_profile_flg = False
     if current_user.is_authenticated:
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
+    g.locale = str(get_locale())
 
 @app.route('/reset_password_request', methods=['GET', 'POST'])
 def reset_password_request():
-    edit_profile_flg = False
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = ResetPasswordRequestForm()
@@ -177,7 +171,6 @@ def reset_password_request():
 
 @app.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
-    edit_profile_flg = False
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     user = User.verify_reset_password_token(token)
