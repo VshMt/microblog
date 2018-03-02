@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-03-01 12:36+0300\n"
+"POT-Creation-Date: 2018-03-01 23:43+0300\n"
 "PO-Revision-Date: 2018-03-01 12:41+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -90,7 +90,7 @@ msgstr "Request Password Reset"
 msgid "Повторите Пароль"
 msgstr "Repeat Password"
 
-#: app/routes.py:35 app/templates/base.html:27
+#: app/routes.py:36 app/templates/base.html:27
 msgid "Домашняя"
 msgstr "Home"
 
@@ -98,58 +98,58 @@ msgstr "Home"
 msgid "Просмотр"
 msgstr "Explore"
 
-#: app/routes.py:62
+#: app/routes.py:61
 msgid "Неправильное имя пользователя или пароль"
 msgstr "Invalid username or password"
 
-#: app/routes.py:89
+#: app/routes.py:86
 msgid "Подравляем, теперь вы зарегистрированный пользователь!"
 msgstr "Congratulations, you are now a registered user!"
 
-#: app/routes.py:91
+#: app/routes.py:88
 msgid "Регистрация"
 msgstr "Sign In"
 
-#: app/routes.py:116
+#: app/routes.py:113
 msgid "Ваши изменения сохранены."
 msgstr "Your changes have been saved."
 
-#: app/routes.py:121
+#: app/routes.py:118
 msgid "Редактирование Профиля"
 msgstr "Edit Profile"
 
-#: app/routes.py:130 app/routes.py:146
+#: app/routes.py:126 app/routes.py:141
 #, python-format
 msgid "Пользователь %(username)s не найден."
 msgstr "User %(username)s not found."
 
-#: app/routes.py:133
+#: app/routes.py:129
 msgid "ВЫ не можете подписаться на себя!"
 msgstr "You cannot follow yourself!"
 
-#: app/routes.py:137
+#: app/routes.py:133
 #, python-format
 msgid "Вы подписались на собщения %(username)s."
 msgstr "You are following %(username)s."
 
-#: app/routes.py:149
+#: app/routes.py:144
 msgid "Вы не можете отписаться от себя!"
 msgstr "You cannot unfollow yourself!"
 
-#: app/routes.py:153
+#: app/routes.py:148
 #, python-format
 msgid "Вы больше не подписаны на собщения %(username)s."
 msgstr "You are not following %(username)s."
 
-#: app/routes.py:173
+#: app/routes.py:167
 msgid "Проверьте адрес вашей эл.почты для получения инструкций по сбросу пароля"
 msgstr "Check your email for the instructions to reset your password"
 
-#: app/routes.py:176 app/templates/reset_password_request.html:4
+#: app/routes.py:170 app/templates/reset_password_request.html:4
 msgid "Сброс Пароля"
 msgstr "Reset Password"
 
-#: app/routes.py:190
+#: app/routes.py:183
 msgid "Ваш пароль будет изменен."
 msgstr "Your password has been reset."
 
@@ -179,6 +179,10 @@ msgid "Профиль"
 msgstr "Profile"
 
 #: app/templates/base.html:39
+msgid "Настройки"
+msgstr "Preferences"
+
+#: app/templates/base.html:40
 msgid "Выход"
 msgstr "Logout"
 
