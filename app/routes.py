@@ -15,6 +15,8 @@ from werkzeug.urls import url_parse
 from datetime import datetime
 from flask_babel import _
 from flask_babel import get_locale
+from flask_login import LoginManager
+import logging
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -106,12 +108,14 @@ def user(username):
 @login_required
 def edit_profile():
     form = EditProfileForm(current_user.username)
+    app.logger.setLevel(logging.INFO)
+    app.logger.info('edit_profile {}\n'.format(current_user.username))
     if form.validate_on_submit():
         current_user.username = form.username.data
         current_user.about_me = form.about_me.data
         db.session.commit()
         flash(_('Ваши изменения сохранены.'))
-        return redirect(url_for('edit_profile'))
+        return redirect(url_for('edit_profile'))#return redirect(url_for('edit_profile'))
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.about_me.data = current_user.about_me

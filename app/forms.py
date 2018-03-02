@@ -1,17 +1,12 @@
-﻿from flask_wtf import FlaskForm
+from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms import SelectField, DecimalField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from wtforms import TextAreaField
 from wtforms.validators import Length
 from app.models import User
 from flask_babel import lazy_gettext as _l
-from decimal import ROUND_UP
-
-class PreferencesForm(FlaskForm):
-    msgs_per_page = DecimalField(_l('Количество записей на странице',rounding=ROUND_UP), validators=[DataRequired()])
-    locale_abbr = SelectField(_l('Язык'), choices=[('en', 'English'), ('ru', 'Русский'), ('text', 'Plain Text')])
-    submit = SubmitField(_l('Сохранить'))
+from flask_login import LoginManager
+import logging
 
 class LoginForm(FlaskForm):
     username = StringField(_l('Имя пользователя'), validators=[DataRequired()])
@@ -38,12 +33,12 @@ class RegistrationForm(FlaskForm):
             raise ValidationError(_l('Пожалуйста введите другой адрес.'))
 
 class EditProfileForm(FlaskForm):
-    username = StringField(('Имя пользователя'), validators=[DataRequired()])
-    about_me = TextAreaField(('О себе'), validators=[Length(min=0, max=140)])
-    submit = SubmitField(('Сохранить изменения'))
+    username = StringField(_l('Имя пользователя'), validators=[DataRequired()])
+    about_me = TextAreaField(_l('О себе'), validators=[Length(min=0, max=140)])
+    submit = SubmitField(_l('Сохранить изменения'))
 
-    def __init__l(self, original_username, *args, **kwargs):
-        super(EditProfileForm, self).__init__l(*args, **kwargs)
+    def __init__(self, original_username, *args, **kwargs):
+        super(EditProfileForm, self).__init__(*args, **kwargs)
         self.original_username = original_username
 
     def validate_username(self, username):
